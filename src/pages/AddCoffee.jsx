@@ -51,7 +51,7 @@ export const AddCoffee = () => {
     <div className="add_coffee_bg py-10 px-5 lg:px-[20%] bg-cover bg-center w-full bg-no-repeat">
       <div>
         <Link to="/">
-          <button className="flex items-center gap-3 font-bold">
+          <button className="flex items-center gap-3 font-bold cursor-pointer">
             <IoMdArrowRoundBack />
             Back to home
           </button>

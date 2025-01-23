@@ -14,7 +14,7 @@ export const CoffeeProduct = () => {
           to="/addCoffee"
           className="flex items-center justify-center mt-3 rounded-lg text-white"
         >
-          <button className="flex items-center gap-2 text-[11px] py-1 px-2 bg-[#E3B577]">
+          <button className="flex items-center font-bold cursor-pointer gap-2 text-[11px] py-1 px-2 bg-[#E3B577]">
             Add Coffee
             <VscCoffee />
           </button>
@@ -40,9 +40,11 @@ export const CoffeeProduct = () => {
               </p>
             </div>
             <div className="flex flex-col justify-center items-center">
-              <button className="p-1 bg-[#D2B48C] text-white cursor-pointer">
-                <FaEye />
-              </button>
+              <Link to={`/coffeeDetails/${coffee._id}`}>
+                <button className="p-1 bg-[#D2B48C] text-white cursor-pointer">
+                  <FaEye />
+                </button>
+              </Link>
               <button className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer">
                 <MdEdit />
               </button>
