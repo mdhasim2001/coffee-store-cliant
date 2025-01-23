@@ -37,7 +37,10 @@ export const AddCoffee = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          if (data) {
+            alert("Your coffee is add");
+          }
+          form.reset();
         });
     } catch (error) {
       console.error(error);
