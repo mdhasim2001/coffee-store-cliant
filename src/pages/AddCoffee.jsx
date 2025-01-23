@@ -2,11 +2,29 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export const AddCoffee = () => {
-  // const hendleAddCoffee = e => {
-  //     e.preventDefault()
-  //     const form = e.target;
-  //     const name = form.
-  // }
+  const hendleAddCoffee = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const chef = form.chef.value;
+    const supplier = form.supplier.value;
+    const teste = form.teste.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const photoUrl = form.photoUrl.value;
+
+    const coffeeDetails = {
+      name,
+      chef,
+      supplier,
+      teste,
+      category,
+      details,
+      photoUrl,
+    };
+
+    console.log(coffeeDetails);
+  };
 
   return (
     <div className="add_coffee_bg py-10 px-5 lg:px-[20%] bg-cover bg-center w-full bg-no-repeat">
@@ -28,7 +46,7 @@ export const AddCoffee = () => {
             distribution of letters, as opposed to using Content here.
           </p>
         </div>
-        <form className="mt-5 flex flex-col gap-5">
+        <form onSubmit={hendleAddCoffee} className="mt-5 flex flex-col gap-5">
           <div className="flex items-center justify-center gap-5">
             <div className="w-full">
               <p className="mb-2 font-bold">Name</p>
@@ -101,7 +119,7 @@ export const AddCoffee = () => {
               className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
               type="text"
               required
-              name="url"
+              name="photoUrl"
               placeholder="Enter coffee photo"
             />
           </div>
