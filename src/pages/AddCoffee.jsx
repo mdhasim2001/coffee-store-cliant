@@ -12,6 +12,7 @@ export const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photoUrl = form.photoUrl.value;
+    const price = form.price.value;
 
     const coffeeDetails = {
       name,
@@ -20,10 +21,27 @@ export const AddCoffee = () => {
       teste,
       category,
       details,
+      price,
       photoUrl,
     };
 
     console.log(coffeeDetails);
+
+    try {
+      fetch("http://localhost:5000/coffees", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(coffeeDetails),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -113,15 +131,27 @@ export const AddCoffee = () => {
               />
             </div>
           </div>
-          <div className="w-full">
-            <p className="mb-2 font-bold">Photo</p>
-            <input
-              className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
-              type="text"
-              required
-              name="photoUrl"
-              placeholder="Enter coffee photo"
-            />
+          <div className="flex items-center justify-center gap-5">
+            <div className="w-full">
+              <p className="mb-2 font-bold">Price</p>
+              <input
+                className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
+                type="text"
+                required
+                name="price"
+                placeholder="Enter coffee price"
+              />
+            </div>
+            <div className="w-full">
+              <p className="mb-2 font-bold">Photo URL</p>
+              <input
+                className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
+                type="text"
+                required
+                name="photoUrl"
+                placeholder="Enter coffee photo URL"
+              />
+            </div>
           </div>
           <input
             className="w-full py-2 px-5 rounded-lg text-[11px] bg-[#D2B48C] cursor-pointer"
