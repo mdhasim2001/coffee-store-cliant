@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap');
+
+
+h1{
+    font-family: "Playwrite IN", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+p{
+    font-size: 11px;
+}
+
+.heder_bg{
+    background-image: url(./assets/images/more/hederImg.jpg);
+}
+
+.banar_bg{
+    background-image: url(./assets/images/more/banar.png);
+    height: 80vh;
+}
+
+.footer_bg{
+    background-image: url(./assets/images/more/13.jpg);
+}
+
+.copy_right{
+    background-image: url(./assets/images/more/24.jpg);
+}
+
+.add_coffee_bg{
+    background-image: url(./assets/images/more/11.png);
+}
