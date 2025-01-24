@@ -1,5 +1,6 @@
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const AddCoffee = () => {
   const hendleAddCoffee = (e) => {
@@ -25,8 +26,6 @@ export const AddCoffee = () => {
       photoUrl,
     };
 
-    console.log(coffeeDetails);
-
     try {
       fetch("http://localhost:5000/coffees", {
         method: "POST",
@@ -37,8 +36,13 @@ export const AddCoffee = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data) {
-            alert("Your coffee is add");
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              draggable: true,
+            });
           }
           form.reset();
         });

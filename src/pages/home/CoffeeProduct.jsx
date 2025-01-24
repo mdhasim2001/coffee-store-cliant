@@ -2,9 +2,25 @@ import { FaEye } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
 import { VscCoffee } from "react-icons/vsc";
+import { useState } from "react";
 
 export const CoffeeProduct = () => {
-  const coffeesData = useLoaderData();
+  const coffeesDataLoad = useLoaderData();
+  const [coffeesData, setCoffeesData] = useState(coffeesDataLoad);
+
+  const hendleCoffeeEdit = (coffeeId) => {
+    fetch(`http://localhost:5000/coffees/${coffeeId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const remaining = coffeesData.filter(
+          (coffee) => coffee._id !== coffeeId
+        );
+        setCoffeesData(remaining);
+      });
+  };
   return (
     <div className="py-10 px-5 lg:px-[20%]">
       <div className="text-center">
@@ -24,7 +40,7 @@ export const CoffeeProduct = () => {
         {coffeesData.map((coffee) => (
           <div key={coffee._id} className="grid grid-cols-5 gap-5 bg-[#F5F4F1]">
             <img
-              className="h-full w-full col-span-2"
+              className="h-[23vh] w-full col-span-2"
               src={coffee.photoUrl}
               alt=""
             />
@@ -48,7 +64,10 @@ export const CoffeeProduct = () => {
               <button className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer">
                 <MdEdit />
               </button>
-              <button className="p-1 bg-[#EA4744] text-white cursor-pointer">
+              <button
+                onClick={() => hendleCoffeeEdit(coffee._id)}
+                className="p-1 bg-[#EA4744] text-white cursor-pointer"
+              >
                 <MdDelete />
               </button>
             </div>
