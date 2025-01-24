@@ -17,7 +17,7 @@ export const CoffeeDetails = () => {
         </Link>
       </div>
       <div className="mt-5 bg-[#F4F3F0] p-10">
-        <div className=" grid grid-cols-2 gap-10">
+        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-10">
           <img src={photoUrl} alt="" />
           <div className="flex flex-col gap-1 justify-center">
             <h1 className="text-xl mb-2 font-extrabold underline">Niceties</h1>
