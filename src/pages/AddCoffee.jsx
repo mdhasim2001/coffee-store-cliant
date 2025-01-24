@@ -36,7 +36,6 @@ export const AddCoffee = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data) {
             Swal.fire({
               title: "Success!",

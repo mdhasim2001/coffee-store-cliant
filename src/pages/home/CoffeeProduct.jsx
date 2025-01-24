@@ -3,23 +3,42 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
 import { VscCoffee } from "react-icons/vsc";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export const CoffeeProduct = () => {
   const coffeesDataLoad = useLoaderData();
   const [coffeesData, setCoffeesData] = useState(coffeesDataLoad);
 
   const hendleCoffeeEdit = (coffeeId) => {
-    fetch(`http://localhost:5000/coffees/${coffeeId}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const remaining = coffeesData.filter(
-          (coffee) => coffee._id !== coffeeId
-        );
-        setCoffeesData(remaining);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/coffees/${coffeeId}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              const remaining = coffeesData.filter(
+                (coffee) => coffee._id !== coffeeId
+              );
+              setCoffeesData(remaining);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
   };
   return (
     <div className="py-10 px-5 lg:px-[20%]">
@@ -57,14 +76,21 @@ export const CoffeeProduct = () => {
             </div>
             <div className="flex flex-col justify-center items-center">
               <Link to={`/coffeeDetails/${coffee._id}`}>
-                <button className="p-1 bg-[#D2B48C] text-white cursor-pointer">
+                <button
+                  title="Viwe"
+                  className="p-1 bg-[#D2B48C] text-white cursor-pointer"
+                >
                   <FaEye />
                 </button>
               </Link>
-              <button className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer">
+              <button
+                title="Edit"
+                className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer"
+              >
                 <MdEdit />
               </button>
               <button
+                title="Delete"
                 onClick={() => hendleCoffeeEdit(coffee._id)}
                 className="p-1 bg-[#EA4744] text-white cursor-pointer"
               >
