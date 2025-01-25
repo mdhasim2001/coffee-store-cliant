@@ -6,6 +6,7 @@ import { CoffeeDetails } from "./pages/CoffeeDetails";
 import { CoffeeDetailsUpdate } from "./pages/CoffeeDetailsUpdate";
 import { CoffeeUserLogin } from "./pages/authentication/CoffeeUserLogin";
 import { CoffeeUserRegister } from "./pages/authentication/CoffeeUserRegister";
+import { PrivetRoute } from "./PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -19,17 +20,29 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addCoffee",
-        element: <AddCoffee />,
+        element: (
+          <PrivetRoute>
+            <AddCoffee />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/coffeeDetails/:id",
-        element: <CoffeeDetails />,
+        element: (
+          <PrivetRoute>
+            <CoffeeDetails />
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/coffees/${params.id}`),
       },
       {
         path: "/coffeeDetailsUpdate/:id",
-        element: <CoffeeDetailsUpdate />,
+        element: (
+          <PrivetRoute>
+            <CoffeeDetailsUpdate />
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/coffees/${params.id}`),
       },

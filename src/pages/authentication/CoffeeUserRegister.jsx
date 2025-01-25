@@ -1,21 +1,24 @@
 import React, { useContext } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/images/more/12.png";
 import { UserContext } from "../../AuthContext";
 
 export const CoffeeUserRegister = () => {
   const { createUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const hendleUserRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        if (result) {
+          navigate("/login");
+          form.reset();
+        }
       })
       .catch((error) => {
         console.error(error);
