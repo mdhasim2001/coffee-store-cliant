@@ -1,9 +1,12 @@
+import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export const AddCoffee = () => {
-  const hendleAddCoffee = (e) => {
+export const CoffeeDetailsUpdate = () => {
+  const coffeeDetails = useLoaderData();
+
+  const hendleUpdateCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -15,7 +18,7 @@ export const AddCoffee = () => {
     const photoUrl = form.photoUrl.value;
     const price = form.price.value;
 
-    const coffeeDetails = {
+    const coffeeUpdateInfo = {
       name,
       chef,
       supplier,
@@ -27,23 +30,22 @@ export const AddCoffee = () => {
     };
 
     try {
-      fetch("http://localhost:5000/coffees", {
-        method: "POST",
+      fetch(`http://localhost:5000/coffees/${coffeeDetails._id}`, {
+        method: "PATCH",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(coffeeDetails),
+        body: JSON.stringify(coffeeUpdateInfo),
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data) {
+          if (data.modifiedCount > 0) {
             Swal.fire({
-              title: "Coffee Add Success!",
+              title: "Coffee Update Success!",
               icon: "success",
               draggable: true,
             });
           }
-          form.reset();
         });
     } catch (error) {
       console.error(error);
@@ -70,7 +72,10 @@ export const AddCoffee = () => {
             distribution of letters, as opposed to using Content here.
           </p>
         </div>
-        <form onSubmit={hendleAddCoffee} className="mt-5 flex flex-col gap-5">
+        <form
+          onSubmit={hendleUpdateCoffee}
+          className="mt-5 flex flex-col gap-5"
+        >
           <div className="flex items-center justify-center gap-5">
             <div className="w-full">
               <p className="mb-2 font-bold">Name</p>
@@ -78,6 +83,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.name}
                 name="name"
                 placeholder="Enter coffee name"
               />
@@ -88,6 +94,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.chef}
                 name="chef"
                 placeholder="Enter coffee chef"
               />
@@ -100,6 +107,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.supplier}
                 name="supplier"
                 placeholder="Enter coffee supplier"
               />
@@ -110,6 +118,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.teste}
                 name="teste"
                 placeholder="Enter coffee teste"
               />
@@ -122,6 +131,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.category}
                 name="category"
                 placeholder="Enter coffee category"
               />
@@ -132,6 +142,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.details}
                 name="details"
                 placeholder="Enter coffee details"
               />
@@ -144,6 +155,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.price}
                 name="price"
                 placeholder="Enter coffee price"
               />
@@ -154,6 +166,7 @@ export const AddCoffee = () => {
                 className="w-full py-2 px-2 bg-white rounded-lg text-[11px]"
                 type="text"
                 required
+                defaultValue={coffeeDetails.photoUrl}
                 name="photoUrl"
                 placeholder="Enter coffee photo URL"
               />

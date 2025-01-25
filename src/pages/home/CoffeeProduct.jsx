@@ -31,7 +31,7 @@ export const CoffeeProduct = () => {
               );
               setCoffeesData(remaining);
               Swal.fire({
-                title: "Deleted!",
+                title: "Coffee Deleted!",
                 text: "Your file has been deleted.",
                 icon: "success",
               });
@@ -83,12 +83,14 @@ export const CoffeeProduct = () => {
                   <FaEye />
                 </button>
               </Link>
-              <button
-                title="Edit"
-                className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer"
-              >
-                <MdEdit />
-              </button>
+              <Link to={`/coffeeDetailsUpdate/${coffee._id}`}>
+                <button
+                  title="Edit"
+                  className="my-2 p-1 bg-[#3C393B] text-white cursor-pointer"
+                >
+                  <MdEdit />
+                </button>
+              </Link>
               <button
                 title="Delete"
                 onClick={() => hendleCoffeeEdit(coffee._id)}
