@@ -20,9 +20,12 @@ export const CoffeeProduct = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffees/${coffeeId}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-store-server-ten-ochre.vercel.app/coffees/${coffeeId}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

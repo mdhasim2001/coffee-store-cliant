@@ -16,7 +16,8 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/coffees"),
+        loader: () =>
+          fetch("https://coffee-store-server-ten-ochre.vercel.app/coffees"),
       },
       {
         path: "/addCoffee",
@@ -34,7 +35,9 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-ten-ochre.vercel.app/coffees/${params.id}`
+          ),
       },
       {
         path: "/coffeeDetailsUpdate/:id",
@@ -44,7 +47,9 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-ten-ochre.vercel.app/coffees/${params.id}`
+          ),
       },
       {
         path: "/login",

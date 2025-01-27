@@ -27,7 +27,7 @@ export const AddCoffee = () => {
     };
 
     try {
-      fetch("http://localhost:5000/coffees", {
+      fetch("https://coffee-store-server-ten-ochre.vercel.app/coffees", {
         method: "POST",
         headers: {
           "content-type": "application/json",

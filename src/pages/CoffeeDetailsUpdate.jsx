@@ -30,13 +30,16 @@ export const CoffeeDetailsUpdate = () => {
     };
 
     try {
-      fetch(`http://localhost:5000/coffees/${coffeeDetails._id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(coffeeUpdateInfo),
-      })
+      fetch(
+        `https://coffee-store-server-ten-ochre.vercel.app/coffees/${coffeeDetails._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(coffeeUpdateInfo),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
